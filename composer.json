@@ -1,0 +1,51 @@
+{
+	"name": "postyou/abr-streaming-bundle",
+	"description": "Adaptive Bitrate Streaming using Mediaelement.js with MPGEG-DASH and HLS manifests",
+	"keywords": [
+		"contao",
+		"abr",
+		"sttreaming",
+		"symfony",
+		"bundle",
+		"dash",
+		"mpeg",
+		"hls"
+	],
+	"type": "contao-bundle",
+	"authors": [
+		{
+			"name": "Markus Nestmann",
+			"role": "Developer"
+		},
+		{
+			"name":"postyou",
+			"homepage":"http://postyou.de"
+		}
+	],
+	"support": {
+		"email": "kontakt@postyou.de"
+	},
+	"require": {
+		"php": ">=5.6.0",
+		"contao/core-bundle": "~4.3",
+		"php-mp4box/php-mp4box": "~4.1.0",
+		"php-ffmpeg/php-ffmpeg": "~v0.11.1-pl-1"
+	},
+	"autoload" : {
+		"psr-4": {
+			"Postyou\\ABRStreamingBundle\\" : "src/"
+		},
+		"classmap": [
+			"src/Resources/contao"
+		],
+		"exclude-from-classmap" : [
+			"src/Resources/contao/config/",
+			"src/Resources/contao/dca/",
+			"src/Resources/contao/languages/",
+			"src/Resources/contao/templates/"
+		]
+	},
+	"extra": {
+		"contao-manager-plugin": "Postyou\\ABRStreamingBundle\\ContaoManager\\Plugin"
+	}
+}
