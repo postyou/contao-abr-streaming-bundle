@@ -33,7 +33,7 @@
 	},
 	"autoload" : {
 		"psr-4": {
-			"Postyou\\ABRStreamingBundle\\" : "src/"
+			"Postyou\\ContaoABRStreamingBundle\\" : "src/"
 		},
 		"classmap": [
 			"src/Resources/contao"
@@ -46,6 +46,6 @@
 		]
 	},
 	"extra": {
-		"contao-manager-plugin": "Postyou\\ABRStreamingBundle\\ContaoManager\\Plugin"
+		"contao-manager-plugin": "Postyou\\ContaoABRStreamingBundle\\ContaoManager\\Plugin"
 	}
 }

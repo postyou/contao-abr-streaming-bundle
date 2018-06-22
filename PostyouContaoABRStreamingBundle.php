@@ -10,9 +10,9 @@
  * @link    http://www.postyou.de
  * @license http://www.apache.org/licenses/LICENSE-2.0
  */
-namespace Postyou\ABRStreamingBundle;
+namespace Postyou\ContaoABRStreamingBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class PostyouABRStreamingBundleBundle extends Bundle
+class PostyouContaoABRStreamingBundleBundle extends Bundle
 {
 }

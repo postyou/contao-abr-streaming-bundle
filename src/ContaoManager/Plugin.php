@@ -9,7 +9,7 @@
  * @author  Markus Nestmann
  * @link    http://www.postyou.de
  */
-namespace Postyou\ABRStreamingBundle\ContaoManager;
+namespace Postyou\ContaoABRStreamingBundle\ContaoManager;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
@@ -23,7 +23,7 @@ class Plugin implements BundlePluginInterface
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create('Postyou\ABRStreamingBundle\PostyouABRStreamingBundle')
+            BundleConfig::create('Postyou\ContaoABRStreamingBundle\PostyouContaoABRStreamingBundle')
                             ->setLoadAfter(['Contao\CoreBundle\ContaoCoreBundle'])
         ];
     }
