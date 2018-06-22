@@ -4,7 +4,7 @@
 	"keywords": [
 		"contao",
 		"abr",
-		"sttreaming",
+		"streaming",
 		"symfony",
 		"bundle",
 		"dash",
@@ -26,10 +26,9 @@
 		"email": "kontakt@postyou.de"
 	},
 	"require": {
-		"php": ">=5.6.0",
+		"php": "~7.0",
 		"contao/core-bundle": "~4.3",
-		"php-mp4box/php-mp4box": "~4.1.0",
-		"php-ffmpeg/php-ffmpeg": "~v0.11.1-pl-1"
+		"php-mp4box/php-mp4box": "~4.1.0"
 	},
 	"autoload" : {
 		"psr-4": {
