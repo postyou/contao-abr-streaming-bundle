@@ -85,24 +85,15 @@ $GLOBALS['TL_DCA']['tl_abrstreaming'] = array
     (
         'sql' => "int(10) unsigned NOT NULL default '0'"
     ),
-    'title'  => array
+    'upload'  => array
     (
-        'label'     => &$GLOBALS['TL_LANG']['tl_abrstreaming']['title'],
-        'inputType' => 'text',
-        'exclude'   => true,
-        'sorting'   => true,
-        'flag'      => 1,
-                    'search'    => true,
-        'eval'      => array(
-            'mandatory'   => true,
-                            'unique'         => true,
-                            'maxlength'   => 255,
-            'tl_class'        => 'w50',
-
-        ),
-        'sql'       => "varchar(255) NOT NULL default ''"
+		'label'				=> &$GLOBALS['TL_LANG']['tl_abrstreaming']['upload'],
+		'exclude'			=> true,
+		'inputType'			=> 'fileTree',
+		'eval'				=> array('helpwizard'=>true, 'filesOnly'=>true, 'fieldType'=>'radio', 'extensions' =>'mp4', 'mandatory'=>true, 'tl_class'=>'clr w50 autoheight'),
+		'sql'				=> "binary(16) NULL"
     ),
-            'url'    => array
+    'url'    => array
     (
         'label'         => &$GLOBALS['TL_LANG']['tl_abrstreaming']['url'],
         'inputType' => 'text',
