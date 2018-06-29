@@ -28,7 +28,8 @@
 	"require": {
 		"php": "~7.0",
 		"contao/core-bundle": "~4.3",
-		"php-mp4box/php-mp4box": "~4.1.0"
+		"php-mp4box/php-mp4box": "~0.3.0",
+		"php-ffmpeg/php-ffmpeg": "~v0.11.1-pl-1"
 	},
 	"autoload" : {
 		"psr-4": {
