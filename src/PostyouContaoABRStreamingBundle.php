@@ -13,6 +13,6 @@
 namespace Postyou\ContaoABRStreamingBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class PostyouContaoABRStreamingBundleBundle extends Bundle
+class PostyouContaoABRStreamingBundle extends Bundle
 {
 }
