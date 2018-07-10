@@ -108,7 +108,7 @@ $GLOBALS['TL_DCA']['tl_abrstreaming'] = array
 		'exclude'			=> true,
 		'inputType'			=> 'text',
 		'eval'				=> array('helpwizard'=>true, 'filesOnly'=>true, 'fieldType'=>'radio', 'extensions' =>'mp4', 'mandatory'=>true, 'tl_class'=>'clr w50 autoheight'),
-		'sql'				=> "binary(16) NULL"
+		'sql'				=> "varchar(255) NOT NULL default ''"
     )
    )
 );
