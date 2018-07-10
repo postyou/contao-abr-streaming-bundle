@@ -72,7 +72,7 @@ $GLOBALS['TL_DCA']['tl_abrstreaming'] = array
     // Palettes
 	'palettes' => array
 	(
-		'default'       => '{title_legend},type,title,{abrstreaming_legend},url'
+		'default'       => '{title_legend},title, upload'
 ),
 // Fields
 'fields'   => array
@@ -92,32 +92,23 @@ $GLOBALS['TL_DCA']['tl_abrstreaming'] = array
         'exclude'   => true,
         'sorting'   => true,
         'flag'      => 1,
-        'search'    => true,
-		'eval'      => array
-						(
-							'mandatory'  => true,
-							'unique'     => true,
-							'maxlength'   => 255,
-							'tl_class'        => 'w50'
-        			   	),
+                    'search'    => true,
+        'eval'      => array(
+            'mandatory'   => true,
+                            'unique'         => true,
+                            'maxlength'   => 255,
+            'tl_class'        => 'w50',
+
+        ),
         'sql'       => "varchar(255) NOT NULL default ''"
 	),
 	'upload'  => array
     (
-        'label'     => &$GLOBALS['TL_LANG']['tl_abrstreaming']['title'],
-        'inputType' => 'text',
-        'exclude'   => true,
-        'sorting'   => true,
-        'flag'      => 1,
-        'search'    => true,
-		'eval'      => array
-						(
-							'mandatory'  => true,
-							'unique'     => true,
-							'maxlength'   => 255,
-							'tl_class'        => 'w50'
-        			   	),
-        'sql'       => "varchar(255) NOT NULL default ''"
-	)
+		'label'				=> &$GLOBALS['TL_LANG']['tl_abrstreaming']['upload'],
+		'exclude'			=> true,
+		'inputType'			=> 'fileTree',
+		'eval'				=> array('helpwizard'=>true, 'filesOnly'=>true, 'fieldType'=>'radio', 'extensions' =>'mp4', 'mandatory'=>true, 'tl_class'=>'clr w50 autoheight'),
+		'sql'				=> "binary(16) NULL"
+    )
    )
 );
