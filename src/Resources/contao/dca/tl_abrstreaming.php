@@ -106,7 +106,7 @@ $GLOBALS['TL_DCA']['tl_abrstreaming'] = array
     (
 		'label'				=> &$GLOBALS['TL_LANG']['tl_abrstreaming']['upload'],
 		'exclude'			=> true,
-		'inputType'			=> 'fileTree',
+		'inputType'			=> 'text',
 		'eval'				=> array('helpwizard'=>true, 'filesOnly'=>true, 'fieldType'=>'radio', 'extensions' =>'mp4', 'mandatory'=>true, 'tl_class'=>'clr w50 autoheight'),
 		'sql'				=> "binary(16) NULL"
     )
