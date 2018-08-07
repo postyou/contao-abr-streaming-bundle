@@ -1,0 +1,12 @@
+<!-- templates/ce_product.html5 -->
+<div class="<?php echo $this->class; ?> block">
+
+    <!-- Überschrift -->
+    <?php if ($this->headline): ?>
+        <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+    <?php endif; ?>
+
+    <video width="640" height="360" controls playsinline webkit-playsinline>
+        <source type="application/dash+xml" src="files/mpd/output_2400k_dash.mpd" title="output_2400k_dash.mpd">
+    </video>
+</div>
