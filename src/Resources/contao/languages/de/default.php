@@ -3,4 +3,4 @@
 /**
  * Content Elements
  */
-$GLOBALS['TL_LANG']['CTE']['abrstreaming'] = array('ABR - Streaming');
+$GLOBALS['TL_LANG']['CTE']['abrstreaming'][0] = 'ABR - Streaming';
