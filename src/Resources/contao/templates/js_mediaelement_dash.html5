@@ -2,11 +2,11 @@
 
 // Add the mediaelement style sheet
 $GLOBALS['TL_CSS'][] = 'assets/mediaelement/css/mediaelementplayer.min.css|static';
-$GLOBALS['TL_CSS'][] = 'bundles/postyoucontaoabrstreaming/css/quality.css|static';
+$GLOBALS['TL_CSS'][] = 'bundles/postyoucontaoabrstreaming/css/qualityselection.css|static';
 ?>
 
 <script src="<?= $this->asset('js/mediaelement-and-player.min.js', 'contao-components/mediaelement') ?>"></script>
-<script src="bundles/postyoucontaoabrstreaming/js/quality.js"></script>
+<script src="bundles/postyoucontaoabrstreaming/js/qualityselection.js"></script>
 <script>
   (function() {
     var e = document.querySelectorAll(':not(picture) > video, :not(picture) > audio');
@@ -15,7 +15,7 @@ $GLOBALS['TL_CSS'][] = 'bundles/postyoucontaoabrstreaming/css/quality.css|static
         if(e[i].classList.contains('autoplay')) var autoplay = true;
         var player = new MediaElementPlayer(e[i], {
           // Put custom options here
-          features: ['playpause', 'current', 'progress', 'duration', 'quality', 'fullscreen'],
+          features: ['playpause', 'current', 'progress', 'duration', 'qualityselection', 'fullscreen'],
           renderers: ['native_dash'],
           pluginPath: "<?= Environment::get('path') ?>/assets/mediaelement/plugins/",
           success: function(player) {

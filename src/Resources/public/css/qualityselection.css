@@ -1,16 +1,16 @@
-.mejs__quality-button,
-.mejs-quality-button {
+.mejs__qualityselection-button,
+.mejs-qualityselection-button {
     position: relative;
 }
 
-.mejs__quality-button > button,
-.mejs-quality-button > button {
-    background: url('../img/quality.svg') transparent no-repeat;
+.mejs__qualityselection-button > button,
+.mejs-qualityselection-button > button {
+    background: url('../img/qualityselection.svg') transparent no-repeat;
     background-position: 0 1px;
 }
 
-.mejs__quality-button .mejs__quality-selector,
-.mejs-quality-button .mejs-quality-selector {
+.mejs__qualityselection-button .mejs__qualityselection-selector,
+.mejs-qualityselection-button .mejs-qualityselection-selector {
     background: rgba(50, 50, 50, 0.7);
     border: solid 1px transparent;
     -webkit-border-radius: 0;
@@ -24,8 +24,8 @@
     width: 130px;
 }
 
-.mejs__quality-selector ul,
-.mejs-quality-selector ul {
+.mejs__qualityselection-selector ul,
+.mejs-qualityselection-selector ul {
     display: block;
     list-style-type: none !important;
     margin: 0;
@@ -33,8 +33,8 @@
     padding: 0;
 }
 
-.mejs__quality-selector li,
-.mejs-quality-selector li {
+.mejs__qualityselection-selector li,
+.mejs-qualityselection-selector li {
     color: #fff;
     display: block;
     list-style-type: none !important;
@@ -43,33 +43,33 @@
     padding: 5px 0;
     position: relative;
 }
-.mejs__quality-selector li:hover,
-.mejs-quality-selector li:hover {
+.mejs__qualityselection-selector li:hover,
+.mejs-qualityselection-selector li:hover {
     background-color: rgba(255, 255, 255, 0.2);
     cursor: pointer;
 }
 
-.mejs__quality-selector input,
-.mejs-quality-selector input {
+.mejs__qualityselection-selector input,
+.mejs-qualityselection-selector input {
     clear: both;
     opacity: 0;
     margin: 3px 3px 0 0;
 }
 
-.mejs__quality-selector input[type='radio'] + label,
-.mejs-quality-selector input[type='radio'] + label {
+.mejs__qualityselection-selector input[type='radio'] + label,
+.mejs-qualityselection-selector input[type='radio'] + label {
     background-image: none;
 }
 
-.mejs__quality-selector input[type='radio']:checked + label,
-.mejs-quality-selector input[type='radio']:checked + label {
+.mejs__qualityselection-selector input[type='radio']:checked + label,
+.mejs-qualityselection-selector input[type='radio']:checked + label {
     background: url("../img/check.png") 8px center no-repeat;
     -webkit-background-size: 12px 12px;
             background-size: 12px 12px;
 }
 
-.mejs__quality-selector label,
-.mejs-quality-selector label {
+.mejs__qualityselection-selector label,
+.mejs-qualityselection-selector label {
     position: absolute;
     left: 0;
     right: 0;
@@ -83,7 +83,7 @@
     font-weight: bold;
 }
 
-.mejs__quality-selector label.current,
-.mejs-quality-selector label.current {
+.mejs__qualityselection-selector label.current,
+.mejs-qualityselection-selector label.current {
     color: #21f8f8;
 }

@@ -32,7 +32,7 @@ Object.assign(MediaElementPlayer.prototype, {
      * @param {HTMLElement} layers
      * @param {HTMLElement} media
      */
-    buildquality (player, controls, layers, media) {	
+    buildqualityselection (player, controls, layers, media) {	
         // This allows us to access options and other useful elements already set.
         // Adding variables to the object is a good idea if you plan to reuse
         // those variables in further operations.
@@ -43,13 +43,13 @@ Object.assign(MediaElementPlayer.prototype, {
 		// add to list
 		let hoverTimeout;
 
-		player.qualityButton = document.createElement('div');
-        player.qualityButton.className = `${t.options.classPrefix}button ${t.options.classPrefix}quality-button`;
-        player.qualityButton.innerHTML =
+		player.qualityselectionButton = document.createElement('div');
+        player.qualityselectionButton.className = `${t.options.classPrefix}button ${t.options.classPrefix}qualityselection-button`;
+        player.qualityselectionButton.innerHTML =
             `<button type="button" role="button" aria-haspopup="true" aria-owns="${t.id}" tabindex="0"></button>` +
-            `<div class="${t.options.classPrefix}quality-selector ${t.options.classPrefix}offscreen" role="menu" aria-expanded="false" aria-hidden="true"><ul></ul></div>`;
+            `<div class="${t.options.classPrefix}qualityselection-selector ${t.options.classPrefix}offscreen" role="menu" aria-expanded="false" aria-hidden="true"><ul></ul></div>`;
 
-		t.addControlElement(player.qualityButton, 'quality');
+		t.addControlElement(player.qualityselectionButton, 'qualityselection');
 		if (media.dashPlayer) {
         media.dashPlayer.on(dashjs.MediaPlayer.events.STREAM_INITIALIZED, function() {
 		
@@ -65,30 +65,30 @@ Object.assign(MediaElementPlayer.prototype, {
         for (let i = 0, total = sources.length; i < total; i++) {
 			const src = sources[i];
 			if (src.mediaType === "video") {
-				if (src.qualityIndex === media.dashPlayer.getQualityFor("video") && !media.dashPlayer.getAutoSwitchQualityFor("video")) var isCurrent = true;
-				player.addQualityButton(src.height + "p", src.qualityIndex, isCurrent);				
+				if (src.qualityselectionIndex === media.dashPlayer.getQualityFor("video") && !media.dashPlayer.getAutoSwitchQualityFor("video")) var isCurrent = true;
+				player.addQualityButton(src.height + "p", src.qualityselectionIndex, isCurrent);				
 			}
 		}
 		player.addQualityButton("Automatisch", "auto", media.dashPlayer.getAutoSwitchQualityFor("video"));				
 
 		// hover
-		player.qualityButton.addEventListener('mouseover', () => {
+		player.qualityselectionButton.addEventListener('mouseover', () => {
 			clearTimeout(hoverTimeout);
 			player.showQualitySelector();
 		});
-		player.qualityButton.addEventListener('mouseout', () => {
+		player.qualityselectionButton.addEventListener('mouseout', () => {
 			hoverTimeout = setTimeout(() => {
 				player.hideQualitySelector();
 			}, 0);
 		});
 
 		// close menu when tabbing away
-		player.qualityButton.addEventListener('focusout', mejs.Utils.debounce(() => {
+		player.qualityselectionButton.addEventListener('focusout', mejs.Utils.debounce(() => {
 			// Safari triggers focusout multiple times
 			// Firefox does NOT support e.relatedTarget to see which element
 			// just lost focus, so wait to find the next focused element
 			setTimeout(() => {
-				const parent = document.activeElement.closest(`.${t.options.classPrefix}quality-selector`);
+				const parent = document.activeElement.closest(`.${t.options.classPrefix}qualityselection-selector`);
 				if (!parent) {
 					// focus is outside the control; close menu
 					player.hideQualitySelector();
@@ -96,7 +96,7 @@ Object.assign(MediaElementPlayer.prototype, {
 			}, 0);
 		}, 100));
 
-		const radios = player.qualityButton.querySelectorAll('input[type=radio]');
+		const radios = player.qualityselectionButton.querySelectorAll('input[type=radio]');
 
 		for (let i = 0, total = radios.length; i < total; i++) {
 			// handle clicks to the source radio buttons
@@ -105,7 +105,7 @@ Object.assign(MediaElementPlayer.prototype, {
 				this.setAttribute('aria-selected', true);
 				this.checked = true;
 
-				const otherRadios = this.closest(`.${t.options.classPrefix}quality-selector`).querySelectorAll('input[type=radio]');
+				const otherRadios = this.closest(`.${t.options.classPrefix}qualityselection-selector`).querySelectorAll('input[type=radio]');
 
 				for (let j = 0, radioTotal = otherRadios.length; j < radioTotal; j++) {
 					if (otherRadios[j] !== this) {
@@ -140,14 +140,14 @@ Object.assign(MediaElementPlayer.prototype, {
 	 * @param {String} height
 	 * @param {Boolean} isCurrent
 	 */
-	addQualityButton (height, qualityIndex, isCurrent)  {
+	addQualityButton (height, qualityselectionIndex, isCurrent)  {
 		const t = this;
 		
 		
-		t.qualityButton.querySelector('ul').innerHTML += `<li>` +
-			`<input type="radio" name="${t.id}_qualitychooser" id="${t.id}_qualitychooser_${height}" ` +
-				`role="menuitemradio" value="${qualityIndex}" ${(isCurrent ? 'checked="checked"' : '')} aria-selected="${isCurrent}"/>` +
-			`<label for="${t.id}_qualitychooser_${height}" aria-hidden="true">${height}</label>` +
+		t.qualityselectionButton.querySelector('ul').innerHTML += `<li>` +
+			`<input type="radio" name="${t.id}_qualityselectionchooser" id="${t.id}_qualityselectionchooser_${height}" ` +
+				`role="menuitemradio" value="${qualityselectionIndex}" ${(isCurrent ? 'checked="checked"' : '')} aria-selected="${isCurrent}"/>` +
+			`<label for="${t.id}_qualityselectionchooser_${height}" aria-hidden="true">${height}</label>` +
 		`</li>`;
 
 		t.adjustQualityBox();
@@ -156,10 +156,10 @@ Object.assign(MediaElementPlayer.prototype, {
 	/**
 	 *
 	 */
-	updateQualityButton (qualityIndex, classPrefix)  {
-		var radio = this.qualityButton.querySelector('input[value="' + qualityIndex + '"] + label');
+	updateQualityButton (qualityselectionIndex, classPrefix)  {
+		var radio = this.qualityselectionButton.querySelector('input[value="' + qualityselectionIndex + '"] + label');
 		radio.style.color = "#21f8f8";
-		const otherRadios = radio.closest(`.${classPrefix}quality-selector`).querySelectorAll('input[type=radio] + label');
+		const otherRadios = radio.closest(`.${classPrefix}qualityselection-selector`).querySelectorAll('input[type=radio] + label');
 		for (let j = 0, radioTotal = otherRadios.length; j < radioTotal; j++) {
 			if (otherRadios[j] !== radio) {
 				otherRadios[j].style.color = "#fff";
@@ -173,8 +173,8 @@ Object.assign(MediaElementPlayer.prototype, {
 	adjustQualityBox ()  {
 		const t = this;
 		// adjust the size of the outer box
-		t.qualityButton.querySelector(`.${t.options.classPrefix}quality-selector`).style.height =
-			`${parseFloat(t.qualityButton.querySelector(`.${t.options.classPrefix}quality-selector ul`).offsetHeight)}px`;
+		t.qualityselectionButton.querySelector(`.${t.options.classPrefix}qualityselection-selector`).style.height =
+			`${parseFloat(t.qualityselectionButton.querySelector(`.${t.options.classPrefix}qualityselection-selector ul`).offsetHeight)}px`;
 	},
 
 	/**
@@ -184,12 +184,12 @@ Object.assign(MediaElementPlayer.prototype, {
 
 		const t = this;
 
-		if (t.qualityButton === undefined || !t.qualityButton.querySelector('input[type=radio]')) {
+		if (t.qualityselectionButton === undefined || !t.qualityselectionButton.querySelector('input[type=radio]')) {
 			return;
 		}
 
 		const
-			selector = t.qualityButton.querySelector(`.${t.options.classPrefix}quality-selector`),
+			selector = t.qualityselectionButton.querySelector(`.${t.options.classPrefix}qualityselection-selector`),
 			radios = selector.querySelectorAll('input[type=radio]')
 		;
 		selector.setAttribute('aria-expanded', 'false');
@@ -209,12 +209,12 @@ Object.assign(MediaElementPlayer.prototype, {
 
 		const t = this;
 
-		if (t.qualityButton === undefined || !t.qualityButton.querySelector('input[type=radio]')) {
+		if (t.qualityselectionButton === undefined || !t.qualityselectionButton.querySelector('input[type=radio]')) {
 			return;
 		}
 
 		const
-			selector = t.qualityButton.querySelector(`.${t.options.classPrefix}quality-selector`),
+			selector = t.qualityselectionButton.querySelector(`.${t.options.classPrefix}qualityselection-selector`),
 			radios = selector.querySelectorAll('input[type=radio]')
 		;
 		selector.setAttribute('aria-expanded', 'true');
