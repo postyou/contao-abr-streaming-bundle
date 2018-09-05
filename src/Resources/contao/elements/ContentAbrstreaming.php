@@ -19,7 +19,6 @@ class ContentAbrstreaming extends \ContentElement
     
     public function __construct($objModule, $strColumn = 'main')
     {
-        $GLOBALS['TL_JAVASCRIPT']['dashPlayer'] = 'bundles/postyoucontaoabrstreaming/js/dashPlayer.js';
         parent::__construct($objModule, $strColumn);       
     }
 
@@ -41,7 +40,7 @@ class ContentAbrstreaming extends \ContentElement
 			return '';
 		}
 
-		$objFiles = \FilesModel::findMultipleByUuidsAndExtensions($source, array('mpd'));
+		$objFiles = \FilesModel::findMultipleByUuidsAndExtensions($source, array('mpd','mp4', 'm4v', 'mov', 'wmv', 'webm', 'ogv'));
 
 		if ($objFiles === null)
 		{
@@ -79,6 +78,12 @@ class ContentAbrstreaming extends \ContentElement
 
 		/** @var FilesModel $objFirst */
 		$objFirst = $objFiles->current();
+
+		// Pre-sort the array by preference
+		if (\in_array($objFirst->extension, array('mpd','mp4', 'm4v', 'mov', 'wmv', 'webm', 'ogv')))
+		{
+			$arrFiles = array('mpd'=>null, 'mp4'=>null, 'm4v'=>null, 'mov'=>null, 'wmv'=>null, 'webm'=>null, 'ogv'=>null);
+		}
 
 		$objFiles->reset();
 
