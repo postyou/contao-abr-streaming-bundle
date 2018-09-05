@@ -10,5 +10,7 @@
  * @link    http://www.postyou.de
  */
 
-$GLOBALS['TL_CTE']['media']['abrstreaming'] = '\\Postyou\\ContaoABRStreamingBundle';
-$GLOBALS['TL_MIME']['mpd'] = array('application/dash+xml', 'iconMP4.svg');
+$GLOBALS['TL_CTE']['media']['abrstreaming'] = 'Postyou\ContaoABRStreamingBundle\ContentAbrstreaming';
+$GLOBALS['TL_MIME']['mpd'] = array('application/dash+xml', 'iconMPEG.svg');
+
+$GLOBALS['TL_HOOKS']['parseTemplate'][] = array('Postyou\ContaoABRStreamingBundle\dashPlayerPlugin', 'myParseFrontendTemplate');
