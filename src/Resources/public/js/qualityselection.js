@@ -65,8 +65,8 @@ Object.assign(MediaElementPlayer.prototype, {
         for (let i = 0, total = sources.length; i < total; i++) {
 			const src = sources[i];
 			if (src.mediaType === "video") {
-				if (src.qualityselectionIndex === media.dashPlayer.getQualityFor("video") && !media.dashPlayer.getAutoSwitchQualityFor("video")) var isCurrent = true;
-				player.addQualityButton(src.height + "p", src.qualityselectionIndex, isCurrent);				
+				if (src.qualityIndex === media.dashPlayer.getQualityFor("video") && !media.dashPlayer.getAutoSwitchQualityFor("video")) var isCurrent = true;
+				player.addQualityButton(src.height + "p", src.qualityIndex, isCurrent);				
 			}
 		}
 		player.addQualityButton("Automatisch", "auto", media.dashPlayer.getAutoSwitchQualityFor("video"));				
@@ -140,13 +140,13 @@ Object.assign(MediaElementPlayer.prototype, {
 	 * @param {String} height
 	 * @param {Boolean} isCurrent
 	 */
-	addQualityButton (height, qualityselectionIndex, isCurrent)  {
+	addQualityButton (height, qualityIndex, isCurrent)  {
 		const t = this;
 		
 		
 		t.qualityselectionButton.querySelector('ul').innerHTML += `<li>` +
 			`<input type="radio" name="${t.id}_qualityselectionchooser" id="${t.id}_qualityselectionchooser_${height}" ` +
-				`role="menuitemradio" value="${qualityselectionIndex}" ${(isCurrent ? 'checked="checked"' : '')} aria-selected="${isCurrent}"/>` +
+				`role="menuitemradio" value="${qualityIndex}" ${(isCurrent ? 'checked="checked"' : '')} aria-selected="${isCurrent}"/>` +
 			`<label for="${t.id}_qualityselectionchooser_${height}" aria-hidden="true">${height}</label>` +
 		`</li>`;
 
@@ -156,8 +156,8 @@ Object.assign(MediaElementPlayer.prototype, {
 	/**
 	 *
 	 */
-	updateQualityButton (qualityselectionIndex, classPrefix)  {
-		var radio = this.qualityselectionButton.querySelector('input[value="' + qualityselectionIndex + '"] + label');
+	updateQualityButton (qualityIndex, classPrefix)  {
+		var radio = this.qualityselectionButton.querySelector('input[value="' + qualityIndex + '"] + label');
 		radio.style.color = "#21f8f8";
 		const otherRadios = radio.closest(`.${classPrefix}qualityselection-selector`).querySelectorAll('input[type=radio] + label');
 		for (let j = 0, radioTotal = otherRadios.length; j < radioTotal; j++) {

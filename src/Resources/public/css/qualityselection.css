@@ -5,7 +5,7 @@
 
 .mejs__qualityselection-button > button,
 .mejs-qualityselection-button > button {
-    background: url('../img/qualityselection.svg') transparent no-repeat;
+    background: url('../img/quality.svg') transparent no-repeat;
     background-position: 0 1px;
 }
 
