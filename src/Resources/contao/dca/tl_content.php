@@ -11,7 +11,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['abrs_playerSRC'] = array
 	'label'				=> &$GLOBALS['TL_LANG']['tl_content']['abrs_playerSRC'],
 	'exclude'			=> true,
 	'inputType'			=> 'fileTree',
-	'eval'				=> array('filesOnly'=>true, 'multiple'=>true, 'fieldType'=>'checkbox', 'extensions' =>'mpd, mp4, m4v, mov, wmv, webm, ogv', 'mandatory'=>true, 'tl_class'=>'clr autoheight'),
+	'eval'				=> array('filesOnly'=>true, 'multiple'=>true, 'fieldType'=>'checkbox', 'extensions' =>'mpd, m3u8, mp4, m4v, mov, wmv, webm, ogv', 'mandatory'=>true, 'tl_class'=>'clr autoheight'),
 	'sql'				=> "blob NULL"
 );
 $GLOBALS['TL_DCA']['tl_content']['fields']['abrs_playerSize'] = array

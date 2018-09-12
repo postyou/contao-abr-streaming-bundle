@@ -15,14 +15,22 @@ $GLOBALS['TL_CSS'][] = 'bundles/postyoucontaoabrstreaming/css/qualityselection.c
         if(e[i].classList.contains('autoplay')) var autoplay = true;
         var player = new MediaElementPlayer(e[i], {
           // Put custom options here
-          features: ['playpause', 'current', 'progress', 'duration', 'qualityselection', 'fullscreen'],
-          renderers: ['native_dash'],
+          features: ['playpause', 'current', 'progress', 'duration', 'volume', 'qualityselection', 'fullscreen'],
+          renderers: ['native_dash', 'native_hls'],
           pluginPath: "<?= Environment::get('path') ?>/assets/mediaelement/plugins/",
-          success: function(player) {
+          /* success: function(player) {
             if (autoplay) {
               player.play();
             }
-          }
+          } */
+
+	success: function(media, node, instance) {
+		// Use the conditional to detect if you are using `native_hls` renderer for that given media;
+		// otherwise, you don't need it
+    if (autoplay) {
+      player.play();
+    }
+	}
       });
       } else {
         new MediaElementPlayer(e[i], {

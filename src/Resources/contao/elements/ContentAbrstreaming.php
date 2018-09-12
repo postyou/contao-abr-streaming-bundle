@@ -40,7 +40,7 @@ class ContentAbrstreaming extends \ContentElement
 			return '';
 		}
 
-		$objFiles = \FilesModel::findMultipleByUuidsAndExtensions($source, array('mpd','mp4', 'm4v', 'mov', 'wmv', 'webm', 'ogv'));
+		$objFiles = \FilesModel::findMultipleByUuidsAndExtensions($source, array('mpd', 'm3u8', 'mp4', 'm4v', 'mov', 'wmv', 'webm', 'ogv'));
 
 		if ($objFiles === null)
 		{
@@ -80,9 +80,9 @@ class ContentAbrstreaming extends \ContentElement
 		$objFirst = $objFiles->current();
 
 		// Pre-sort the array by preference
-		if (\in_array($objFirst->extension, array('mpd','mp4', 'm4v', 'mov', 'wmv', 'webm', 'ogv')))
+		if (\in_array($objFirst->extension, array('mpd','m3u8', 'mp4', 'm4v', 'mov', 'wmv', 'webm', 'ogv')))
 		{
-			$arrFiles = array('mpd'=>null, 'mp4'=>null, 'm4v'=>null, 'mov'=>null, 'wmv'=>null, 'webm'=>null, 'ogv'=>null);
+			$arrFiles = array('mpd'=>null, 'm3u8'=>null, 'mp4'=>null, 'm4v'=>null, 'mov'=>null, 'wmv'=>null, 'webm'=>null, 'ogv'=>null);
 		}
 
 		$objFiles->reset();

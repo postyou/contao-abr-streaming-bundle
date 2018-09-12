@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * [Name of feature]
+ * qualityselection
  *
- * [Description]
+ * displays available sources for MPEG Dash Streaming
  */
 
 // If plugin needs translations, put here English one in this format:
@@ -40,8 +40,8 @@ Object.assign(MediaElementPlayer.prototype, {
 			t = this,			
 			sources = []			
 		;
+		var value;
 		// add to list
-		let hoverTimeout;
 
 		player.qualityselectionButton = document.createElement('div');
         player.qualityselectionButton.className = `${t.options.classPrefix}button ${t.options.classPrefix}qualityselection-button`;
@@ -50,40 +50,92 @@ Object.assign(MediaElementPlayer.prototype, {
             `<div class="${t.options.classPrefix}qualityselection-selector ${t.options.classPrefix}offscreen" role="menu" aria-expanded="false" aria-hidden="true"><ul></ul></div>`;
 
 		t.addControlElement(player.qualityselectionButton, 'qualityselection');
+
 		if (media.dashPlayer) {
-        media.dashPlayer.on(dashjs.MediaPlayer.events.STREAM_INITIALIZED, function() {
-		
-        for (let i = 0, total = media.dashPlayer.getBitrateInfoListFor('video').length; i < total; i++) {
-            const s = media.dashPlayer.getBitrateInfoListFor('video')[i];
+			media.dashPlayer.on(dashjs.MediaPlayer.events.STREAM_INITIALIZED, function() {
+				value = player.getSourcesDash(sources, media.dashPlayer);
+				if (value === -1) return;
+				player.addHoverAndFocus();
+				player.addClick(media, t.options.classPrefix);
+
+				media.dashPlayer.on(dashjs.MediaPlayer.events.QUALITY_CHANGE_REQUESTED, function() {
+					player.updateQualityButton(media.dashPlayer.getQualityFor('video'), t.options.classPrefix);
+				}, t);
+			}, t);
+		} else if(media.hlsPlayer) {
+			media.hlsPlayer.on(Hls.Events.MANIFEST_PARSED, function() {
+				value = player.getSourcesHls(sources, media.hlsPlayer);
+				if (value === -1) return;
+				player.addHoverAndFocus();				
+				player.addClick(media, t.options.classPrefix);
+
+				media.hlsPlayer.on(Hls.Events.LEVEL_SWITCHED, function(event, data) {										
+					player.updateQualityButton(data.level, t.options.classPrefix);
+				});
+			});
+		}
+	},
+
+	getSourcesDash (sources, dashPlayer) {
+		const t = this;
+		for (let i = 0, total = dashPlayer.getBitrateInfoListFor('video').length; i < total; i++) {
+            const s = dashPlayer.getBitrateInfoListFor('video')[i];
 		    sources.unshift(s);
 		}
 
 		if (sources.length <= 1) {
-			return;
+			return -1;
 		}		
                 
         for (let i = 0, total = sources.length; i < total; i++) {
 			const src = sources[i];
 			if (src.mediaType === "video") {
-				if (src.qualityIndex === media.dashPlayer.getQualityFor("video") && !media.dashPlayer.getAutoSwitchQualityFor("video")) var isCurrent = true;
-				player.addQualityButton(src.height + "p", src.qualityIndex, isCurrent);				
+				if (src.qualityIndex === dashPlayer.getQualityFor("video") && !dashPlayer.getAutoSwitchQualityFor("video")) var isCurrent = true;
+				t.addQualityButton(src.height + "p", src.qualityIndex, isCurrent);				
 			}
 		}
-		player.addQualityButton("Automatisch", "auto", media.dashPlayer.getAutoSwitchQualityFor("video"));				
+		t.addQualityButton("Automatisch", "auto", dashPlayer.getAutoSwitchQualityFor("video"));
+		return 0;
+	},
 
+	getSourcesHls (sources, hlsPlayer) {
+		const t = this;
+		var isCurrent = false;
+
+		for (let i = 0, total = hlsPlayer.levels.length; i < total; i++) {
+            const s = hlsPlayer.levels[i];
+		    sources.unshift(s);
+		}
+
+		if (sources.length <= 1) {
+			return -1;
+		}		
+                
+        for (let i = 0, total = sources.length; i < total; i++) {
+			const src = sources[i];
+			if (i === hlsPlayer.firstLevel && !hlsPlayer.autoLevelEnabled) isCurrent = true;
+			t.addQualityButton(src.height + "p", sources.length - (1 + i), isCurrent);
+		}
+		t.addQualityButton("Automatisch", "auto", hlsPlayer.autoLevelEnabled);
+		return 0;
+	},
+
+	addHoverAndFocus () {
+		const t = this;
+		let hoverTimeout;
 		// hover
-		player.qualityselectionButton.addEventListener('mouseover', () => {
+		t.qualityselectionButton.addEventListener('mouseover', () => {
 			clearTimeout(hoverTimeout);
-			player.showQualitySelector();
+			t.showQualitySelector();
 		});
-		player.qualityselectionButton.addEventListener('mouseout', () => {
+		t.qualityselectionButton.addEventListener('mouseout', () => {
 			hoverTimeout = setTimeout(() => {
-				player.hideQualitySelector();
+				t.hideQualitySelector();
 			}, 0);
 		});
 
 		// close menu when tabbing away
-		player.qualityselectionButton.addEventListener('focusout', mejs.Utils.debounce(() => {
+		t.qualityselectionButton.addEventListener('focusout', mejs.Utils.debounce(() => {
 			// Safari triggers focusout multiple times
 			// Firefox does NOT support e.relatedTarget to see which element
 			// just lost focus, so wait to find the next focused element
@@ -91,12 +143,18 @@ Object.assign(MediaElementPlayer.prototype, {
 				const parent = document.activeElement.closest(`.${t.options.classPrefix}qualityselection-selector`);
 				if (!parent) {
 					// focus is outside the control; close menu
-					player.hideQualitySelector();
+					t.hideQualitySelector();
 				}
 			}, 0);
 		}, 100));
+	},
 
-		const radios = player.qualityselectionButton.querySelectorAll('input[type=radio]');
+	addClick (media, classPrefix) {
+		const t = this;
+		const radios = t.qualityselectionButton.querySelectorAll('input[type=radio]');
+		var dash = false;
+
+		if(media.dashPlayer) dash = true;
 
 		for (let i = 0, total = radios.length; i < total; i++) {
 			// handle clicks to the source radio buttons
@@ -105,7 +163,7 @@ Object.assign(MediaElementPlayer.prototype, {
 				this.setAttribute('aria-selected', true);
 				this.checked = true;
 
-				const otherRadios = this.closest(`.${t.options.classPrefix}qualityselection-selector`).querySelectorAll('input[type=radio]');
+				const otherRadios = this.closest(`.${classPrefix}qualityselection-selector`).querySelectorAll('input[type=radio]');
 
 				for (let j = 0, radioTotal = otherRadios.length; j < radioTotal; j++) {
 					if (otherRadios[j] !== this) {
@@ -114,35 +172,48 @@ Object.assign(MediaElementPlayer.prototype, {
 					}
 				}
 
-				const selectedSrc = this.value;
-
-				if (selectedSrc === "auto") {
-					media.dashPlayer.setAutoSwitchQualityFor('video', true);
-				} else if (media.dashPlayer.getQualityFor('video') !== selectedSrc) {
-					media.dashPlayer.setAutoSwitchQualityFor('video', false);
-					media.dashPlayer.setQualityFor('video', selectedSrc);
+				if(dash) {
+					t.switchSourceDash(this.value, media.dashPlayer, classPrefix);
 				} else {
-					media.dashPlayer.setAutoSwitchQualityFor('video', false);
-				}
+					t.switchSourceHls(this.value, media.hlsPlayer, classPrefix);
+				}				
 			});
 		}
-		player.updateQualityButton(media.dashPlayer.getQualityFor('video'), t.options.classPrefix);
-		media.dashPlayer.on(dashjs.MediaPlayer.events.QUALITY_CHANGE_REQUESTED, function() {
-			player.updateQualityButton(media.dashPlayer.getQualityFor('video'), t.options.classPrefix);
-		}, this);
+	},
 
-		}, this);
-	}
+	switchSourceDash (selectedSrc, dashPlayer, classPrefix) {
+		const t = this;
+
+		if (selectedSrc === "auto") {
+			dashPlayer.setAutoSwitchQualityFor('video', true);
+		} else if (dashPlayer.getQualityFor('video') !== selectedSrc) {
+			dashPlayer.setAutoSwitchQualityFor('video', false);
+			dashPlayer.setQualityFor('video', selectedSrc);
+		} else {
+			dashPlayer.setAutoSwitchQualityFor('video', false);
+		}
+		t.updateQualityButton(dashPlayer.getQualityFor('video'), classPrefix);
+	},
+
+	switchSourceHls (selectedSrc, hlsPlayer, classPrefix) {
+		const t = this;
+		
+		if (selectedSrc === "auto") {
+			hlsPlayer.nextLevel = -1;
+		} else {
+			hlsPlayer.nextLevel = selectedSrc;
+		}		
+		t.updateQualityButton(hlsPlayer.nextLevel, classPrefix);
 	},
 	
 	/**
 	 *
 	 * @param {String} height
+	 * @param {String} qualityIndex
 	 * @param {Boolean} isCurrent
 	 */
 	addQualityButton (height, qualityIndex, isCurrent)  {
-		const t = this;
-		
+		const t = this;		
 		
 		t.qualityselectionButton.querySelector('ul').innerHTML += `<li>` +
 			`<input type="radio" name="${t.id}_qualityselectionchooser" id="${t.id}_qualityselectionchooser_${height}" ` +
@@ -154,10 +225,13 @@ Object.assign(MediaElementPlayer.prototype, {
 	},
 	
 	/**
-	 *
+	 * @param {String} qualityIndex
+	 * @param {String} classPrefix
 	 */
 	updateQualityButton (qualityIndex, classPrefix)  {
-		var radio = this.qualityselectionButton.querySelector('input[value="' + qualityIndex + '"] + label');
+		const t = this;
+		
+		var radio = t.qualityselectionButton.querySelector('input[value="' + qualityIndex + '"] + label');
 		radio.style.color = "#21f8f8";
 		const otherRadios = radio.closest(`.${classPrefix}qualityselection-selector`).querySelectorAll('input[type=radio] + label');
 		for (let j = 0, radioTotal = otherRadios.length; j < radioTotal; j++) {
