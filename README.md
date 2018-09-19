@@ -17,7 +17,7 @@ When more than one video source is provided the following order is applied: mpd,
 * Add fallback videos (e.g. `mp4, m4v, mov, wmv, webm, ogv`)
 
 ## Mediaelement.js Plugin
-With this extension it is possible to include the feature `qualityselection` for switching between quality levels:
+With this extension it is possible to include the feature `qualityselection` to allow switching between quality levels:
 ```js
 var player = new MediaElementPlayer(e[i], {
     features: ['playpause', 'current', 'progress', 'duration', 'volume', 'qualityselection', 'fullscreen']
