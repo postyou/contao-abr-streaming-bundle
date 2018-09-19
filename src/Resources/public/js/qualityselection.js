@@ -185,11 +185,14 @@ Object.assign(MediaElementPlayer.prototype, {
 		const t = this;
 
 		if (selectedSrc === "auto") {
+			dashPlayer.setFastSwitchEnabled(false);
 			dashPlayer.setAutoSwitchQualityFor('video', true);
 		} else if (dashPlayer.getQualityFor('video') !== selectedSrc) {
 			dashPlayer.setAutoSwitchQualityFor('video', false);
+			dashPlayer.setFastSwitchEnabled(true);
 			dashPlayer.setQualityFor('video', selectedSrc);
 		} else {
+			dashPlayer.setFastSwitchEnabled(true);
 			dashPlayer.setAutoSwitchQualityFor('video', false);
 		}
 		t.updateQualityButton(dashPlayer.getQualityFor('video'), classPrefix);
