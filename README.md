@@ -12,8 +12,8 @@ When more than one video source is provided the following order is applied: mpd,
 ![screenshot](https://github.com/postyou/contao-abr-streaming-bundle/blob/master/readme_img/Element.png)
 
 * Create a new content element `ABR - Streaming`
-* Add a MPEG-Dash Manifest (e.g. `playlist.mpd`)
-* Add an HLS Manifest (e.g. `playlist.m3u8`)
+* Add MPEG-Dash manifests (e.g. `playlist.mpd`)
+* Add HLS manifests (e.g. `playlist.m3u8`)
 * Add fallback videos (e.g. `mp4, m4v, mov, wmv, webm, ogv`)
 
 ## Mediaelement.js Plugin
