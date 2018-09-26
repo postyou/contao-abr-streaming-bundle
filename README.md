@@ -4,7 +4,7 @@ Adaptive Bitrate Streaming using Mediaelement.js with MPGEG-DASH and HLS manifes
 Contao-Extension for Contao 4
 
 ## Notes
-When using this extension the `js_medialement` template has to be included in the layout. However, if you want to customize the template, you have to make all the changes to `js_mediaelement_dash`. All changes to `js_medialement` will be overridden by `js_medialement_dash`.
+When using this extension the `js_medialement` template has to be included in the layout. Internally, `js_medialement` will then be replaced by `js_mediaelement_dash`. Therefore, if you want to customize the template in Contao, you have to edit `js_mediaelement_dash`.
 
 When more than one video source is provided the following order is applied: mpd, m3u8, mp4, m4v, mov, wmv, webm, ogv.
 
