@@ -26,7 +26,7 @@ var player = new MediaElementPlayer(e[i], {
 
 ![screenshot](https://github.com/postyou/contao-abr-streaming-bundle/blob/master/readme_img/Plugin.png)
 
-# Example DASH Content Generation
+## Example DASH Content Generation
 ```sh
 # 1080p - 4800k bandwidth
 x264 --output intermediate_4800k.264 --fps 24 --preset slow \
@@ -53,7 +53,7 @@ MP4Box -dash 4000 -frag 4000 -rap -segment-name '$RepresentationID$/segment_' -u
 intermediate_4800k.mp4:id=1080 intermediate_2400k.mp4:id=720 intermediate_1400k.mp4:id=540 audio.m4a:id=audio
 ```
 
-# Useful Links
+## Useful Links
 * [majamee/alpine-dash-hls](https://github.com/majamee/alpine-dash-hls)
 * [Bitmovin dash content generation](https://bitmovin.com/mp4box-dash-content-generation-x264/)
 * [squidpickles/mpd-to-m3u8](https://github.com/squidpickles/mpd-to-m3u8)
