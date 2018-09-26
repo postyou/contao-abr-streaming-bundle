@@ -1,5 +1,5 @@
 # contao-abr-streaming
-Adaptive Bitrate Streaming using Mediaelement.js with MPGEG-DASH and HLS manifests
+Adaptive Bitrate Streaming using Mediaelement.js with MPEG-DASH and HLS manifests
 
 Contao-Extension for Contao 4
 
