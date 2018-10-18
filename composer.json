@@ -3,12 +3,8 @@
 	"description": "Adaptive Bitrate Streaming using Mediaelement.js with MPGEG-DASH and HLS manifests",
 	"keywords": [
 		"contao",
-		"abr",
 		"streaming",
-		"symfony",
-		"bundle",
 		"dash",
-		"mpeg",
 		"hls"
 	],
 	"type": "contao-bundle",
