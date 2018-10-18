@@ -1,3 +1,4 @@
+[zur deutschen Version wechseln](https://github.com/postyou/contao-abr-streaming-bundle/blob/master/README.de.md)
 # contao-abr-streaming
 Adaptive Bitrate Streaming using Mediaelement.js with MPEG-DASH and HLS manifests
 
