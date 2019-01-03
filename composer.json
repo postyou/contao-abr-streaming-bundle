@@ -9,14 +9,13 @@
 	],
 	"type": "contao-bundle",
 	"license": "LGPL-3.0-or-later",
-	"authors": [
-		{
+	"authors": [{
 			"name": "Markus Nestmann",
 			"role": "Developer"
 		},
 		{
-			"name":"postyou",
-			"homepage":"http://postyou.de"
+			"name": "postyou",
+			"homepage": "http://postyou.de"
 		}
 	],
 	"support": {
@@ -26,9 +25,9 @@
 		"php": "~7.0",
 		"contao/core-bundle": "~4.3"
 	},
-	"autoload" : {
+	"autoload": {
 		"psr-4": {
-			"Postyou\\ContaoABRStreamingBundle\\" : "src/"
+			"Postyou\\ContaoABRStreamingBundle\\": "src/"
 		},
 		"classmap": [
 			"src/Resources/contao/"

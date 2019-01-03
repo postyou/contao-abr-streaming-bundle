@@ -1,6 +1,15 @@
 <?php
- 
- // languages/de/tl_content.php
+/**
+ *
+ * Extension for Contao Open Source CMS (contao.org)
+ *
+ * Copyright (c) 2018-2019 POSTYOU
+ *
+ * @package
+ * @author  Markus Nestmann
+ * @link    http://www.postyou.de
+ * @license http://www.apache.org/licenses/LICENSE-2.0
+ */
 
  /**
   * Fields

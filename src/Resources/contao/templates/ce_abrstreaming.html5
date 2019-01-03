@@ -1,15 +1,21 @@
 <?php $this->extend('block_unsearchable'); ?>
 
 <?php $this->block('content'); ?>
-    <!-- Überschrift -->
-    <?php if ($this->headline): ?>
-    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
-    <?php endif; ?>
+<!-- Überschrift -->
+<?php if ($this->headline): ?>
+<<?php echo $this->hl; ?>>
+  <?php echo $this->headline; ?>
+</<?php echo $this->hl; ?>>
+<?php endif; ?>
 
-    <video class="abr-streaming<?php if ($this->autoplay): ?> autoplay<?php endif; ?>" <?php if ($this->poster): ?> poster="<?= $this->poster ?>" preload="none"<?php endif; ?> <?= $this->size ?> controls playsinline webkit-playsinline>
-      <?php foreach ($this->files as $file): ?>
-        <source type="<?= $file->mime ?>" src="<?= $file->path ?>" title="<?= $file->title ?>">
-      <?php endforeach; ?>
-    </video>
+<video class="abr-streaming<?php if ($this->autoplay): ?> autoplay<?php endif; ?>" <?php if ($this->poster): ?>
+  poster="
+  <?= $this->poster ?>" preload="none"
+  <?php endif; ?>
+  <?= $this->size ?> controls playsinline webkit-playsinline>
+  <?php foreach ($this->files as $file): ?>
+  <source type="<?= $file->mime ?>" src="<?= $file->path ?>" title="<?= $file->title ?>">
+  <?php endforeach; ?>
+</video>
 
 <?php $this->endblock(); ?>
