@@ -6,7 +6,7 @@ Contao-Extension for Contao 4
 
 ## Notes
 
-There is an issue with the latest dash.js version [#2659](https://github.com/mediaelement/mediaelement/issues/2659) which is currently only fixed in a Pre-Release of medialement.js.
+**There is an issue with the latest dash.js version [#2659](https://github.com/mediaelement/mediaelement/issues/2659) which is currently only fixed in a Pre-Release of medialement.js.**
 
 When using this extension the `js_medialement` template has to be included in the layout. Internally, `js_medialement` will then be replaced by `js_mediaelement_dash`. Therefore, if you want to customize the template in Contao, you have to edit `js_mediaelement_dash`.
 
