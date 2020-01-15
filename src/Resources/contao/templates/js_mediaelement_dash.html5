@@ -19,17 +19,10 @@ $GLOBALS['TL_CSS'][] = 'bundles/postyoucontaoabrstreaming/css/qualityselection.c
           renderers: ['native_dash', 'native_hls'],
           pluginPath: "<?= Environment::get('path') ?>/assets/mediaelement/plugins/",
           success: function (media, node, instance) {
-            // Use the conditional to detect if you are using `native_hls` renderer for that given media;
-            // otherwise, you don't need it
             if (autoplay) {
               player.play();
             }
           }
-        });
-      } else {
-        new MediaElementPlayer(e[i], {
-          // Put custom options here
-          pluginPath: "<?= Environment::get('path') ?>/assets/mediaelement/plugins/"
         });
       }
     }
