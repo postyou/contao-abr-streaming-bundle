@@ -184,9 +184,9 @@ Object.assign(MediaElementPlayer.prototype, {
 		const t = this;
 
 		if (selectedSrc === "auto") {
-			dashPlayer.setFastSwitchEnabled(false);
 			dashPlayer.updateSettings({
 				'streaming': {
+					'fastSwitchEnabled': false,
 					'abr': {
 						'autoSwitchBitrate': {
 							'video': true
@@ -197,6 +197,7 @@ Object.assign(MediaElementPlayer.prototype, {
 		} else if (dashPlayer.getQualityFor('video') !== selectedSrc) {
 			dashPlayer.updateSettings({
 				'streaming': {
+					'fastSwitchEnabled': true,
 					'abr': {
 						'autoSwitchBitrate': {
 							'video': false
@@ -204,12 +205,11 @@ Object.assign(MediaElementPlayer.prototype, {
 					}
 				}
 			});
-			dashPlayer.setFastSwitchEnabled(true);
 			dashPlayer.setQualityFor('video', selectedSrc);
 		} else {
-			dashPlayer.setFastSwitchEnabled(true);
 			dashPlayer.updateSettings({
 				'streaming': {
+					'fastSwitchEnabled': true,
 					'abr': {
 						'autoSwitchBitrate': {
 							'video': false
