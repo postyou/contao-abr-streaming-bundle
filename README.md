@@ -6,9 +6,7 @@ Contao-Extension for Contao 4
 
 ## Notes
 
-**There is an issue with the latest dash.js version [#2659](https://github.com/mediaelement/mediaelement/issues/2659) which is currently only fixed in a Pre-Release of medialement.js.**
-
-When using this extension the `js_medialement` template has to be included in the layout. Internally, `js_medialement` will then be replaced by `js_mediaelement_dash`. Therefore, if you want to customize the template in Contao, you have to edit `js_mediaelement_dash`.
+When using this extension the `js_medialement_dash` template has to be included in the layout.
 
 When more than one video source is provided the following order is applied: mpd, m3u8, mp4, m4v, mov, wmv, webm, ogv.
 
@@ -21,7 +19,7 @@ When more than one video source is provided the following order is applied: mpd,
 * Add fallback videos (e.g. `mp4, m4v, mov, wmv, webm, ogv`)
 
 ## Mediaelement.js Plugin
-With this extension it is possible to include the feature `qualityselection` to allow switching between quality levels:
+With this extension it is possible to include the feature `qualityselection`. This allows the user to switch between video quality levels:
 ```js
 var player = new MediaElementPlayer(e[i], {
     features: ['playpause', 'current', 'progress', 'duration', 'volume', 'qualityselection', 'fullscreen']

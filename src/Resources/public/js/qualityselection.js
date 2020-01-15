@@ -88,12 +88,12 @@ Object.assign(MediaElementPlayer.prototype, {
 
 		for (let i = 0, total = sources.length; i < total; i++) {
 			const src = sources[i];
-			if (src.mediaType === "video") {
-				if (src.qualityIndex === dashPlayer.getQualityFor("video") && !dashPlayer.getAutoSwitchQualityFor("video")) var isCurrent = true;
+			if (src.mediaType === "video") {				
+				if (src.qualityIndex === dashPlayer.getQualityFor("video") && !dashPlayer.getSettings().streaming.abr.autoSwitchBitrate.video) var isCurrent = true;
 				t.addQualityButton(src.height + "p", src.qualityIndex, isCurrent);
 			}
 		}
-		t.addQualityButton("Automatisch", "auto", dashPlayer.getAutoSwitchQualityFor("video"));
+		t.addQualityButton("Automatisch", "auto", dashPlayer.getSettings().streaming.abr.autoSwitchBitrate.video);
 		return 0;
 	},
 
@@ -184,15 +184,39 @@ Object.assign(MediaElementPlayer.prototype, {
 		const t = this;
 
 		if (selectedSrc === "auto") {
-			dashPlayer.setFastSwitchEnabled(false);
-			dashPlayer.setAutoSwitchQualityFor('video', true);
+			dashPlayer.updateSettings({
+				'streaming': {
+					'fastSwitchEnabled': false,
+					'abr': {
+						'autoSwitchBitrate': {
+							'video': true
+						}
+					}
+				}
+			});
 		} else if (dashPlayer.getQualityFor('video') !== selectedSrc) {
-			dashPlayer.setAutoSwitchQualityFor('video', false);
-			dashPlayer.setFastSwitchEnabled(true);
+			dashPlayer.updateSettings({
+				'streaming': {
+					'fastSwitchEnabled': true,
+					'abr': {
+						'autoSwitchBitrate': {
+							'video': false
+						}
+					}
+				}
+			});
 			dashPlayer.setQualityFor('video', selectedSrc);
 		} else {
-			dashPlayer.setFastSwitchEnabled(true);
-			dashPlayer.setAutoSwitchQualityFor('video', false);
+			dashPlayer.updateSettings({
+				'streaming': {
+					'fastSwitchEnabled': true,
+					'abr': {
+						'autoSwitchBitrate': {
+							'video': false
+						}
+					}
+				}
+			});
 		}
 		t.updateQualityButton(dashPlayer.getQualityFor('video'), classPrefix);
 	},

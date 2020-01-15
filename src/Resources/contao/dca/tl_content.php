@@ -10,7 +10,6 @@
  * @link    http://www.postyou.de
  * @license http://www.apache.org/licenses/LICENSE-2.0
  */
-array_push($GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'], array('Postyou\ContaoABRStreamingBundle\tl_content', 'showJsLibraryHint'));
 
 // Add palette to tl_content
 $GLOBALS['TL_DCA']['tl_content']['palettes']['abrstreaming'] = '{type_legend},type,headline;{sources},abrs_playerSRC;{poster_legend:hide},posterSRC;{player_legend},abrs_playerSize,abrs_autoplay;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID;{invisible_legend:hide},invisible,start,stop';
