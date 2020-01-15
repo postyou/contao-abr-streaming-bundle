@@ -24,7 +24,7 @@
 	"require": {
 		"php": "~7.0",
 		"contao/core-bundle": "~4.3",
-		"contao-components/mediaelement": "^4.2"
+		"contao-components/mediaelement": "~4.2.12"
 	},
 	"autoload": {
 		"psr-4": {
