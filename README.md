@@ -8,6 +8,8 @@ Contao-Extension for Contao 4
 
 When using this extension the `js_medialement_dash` template has to be included in the layout.
 
+> You should not use both, `j_medialement` and `js_medialement_dash`, at the same time.
+
 When more than one video source is provided the following order is applied: mpd, m3u8, mp4, m4v, mov, wmv, webm, ogv.
 
 ## Usage

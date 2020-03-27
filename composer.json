@@ -1,14 +1,15 @@
 {
 	"name": "postyou/contao-abr-streaming-bundle",
-	"description": "Adaptive Bitrate Streaming using Mediaelement.js with MPGEG-DASH and HLS manifests",
+	"description": "Adaptive Bitrate Streaming using Mediaelement.js with MPEG-DASH and HLS manifests",
 	"keywords": [
 		"contao",
 		"streaming",
 		"dash",
 		"hls"
 	],
+	"version": "v1.1.0",
 	"type": "contao-bundle",
-	"license": "LGPL-3.0-or-later",
+	"license": "Apache-2.0",
 	"authors": [{
 			"name": "Markus Nestmann",
 			"role": "Developer"
