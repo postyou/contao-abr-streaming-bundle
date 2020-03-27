@@ -7,7 +7,6 @@
 		"dash",
 		"hls"
 	],
-	"version": "v1.1.0",
 	"type": "contao-bundle",
 	"license": "Apache-2.0",
 	"authors": [{
