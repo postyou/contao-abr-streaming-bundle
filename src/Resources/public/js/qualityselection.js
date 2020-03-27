@@ -90,7 +90,7 @@ Object.assign(MediaElementPlayer.prototype, {
 			const src = sources[i];
 			if (src.mediaType === "video") {				
 				if (src.qualityIndex === dashPlayer.getQualityFor("video") && !dashPlayer.getSettings().streaming.abr.autoSwitchBitrate.video) var isCurrent = true;
-				t.addQualityButton(src.width, src.qualityIndex, isCurrent);
+				t.addQualityButton(src.height + "p", src.qualityIndex, isCurrent);
 			}
 		}
 		t.addQualityButton("Automatisch", "auto", dashPlayer.getSettings().streaming.abr.autoSwitchBitrate.video);
@@ -113,7 +113,7 @@ Object.assign(MediaElementPlayer.prototype, {
 		for (let i = 0, total = sources.length; i < total; i++) {
 			const src = sources[i];
 			if (i === hlsPlayer.firstLevel && !hlsPlayer.autoLevelEnabled) isCurrent = true;
-			t.addQualityButton(src.width, sources.length - (1 + i), isCurrent);
+			t.addQualityButton(src.height + "p", sources.length - (1 + i), isCurrent);
 		}
 		t.addQualityButton("Automatisch", "auto", hlsPlayer.autoLevelEnabled);
 		return 0;
@@ -234,18 +234,12 @@ Object.assign(MediaElementPlayer.prototype, {
 
 	/**
 	 *
-	 * @param {String} width
+	 * @param {String} height
 	 * @param {String} qualityIndex
 	 * @param {Boolean} isCurrent
 	 */
-	addQualityButton(width, qualityIndex, isCurrent) {
+	addQualityButton(height, qualityIndex, isCurrent) {
 		const t = this;
-
-		if (width != "Automatisch") {
-			width = width * 9/16 + "p";
-		}
-
-		const height = width;
 
 		t.qualityselectionButton.querySelector('ul').innerHTML += `<li>` +
 			`<input type="radio" name="${t.id}_qualityselectionchooser" id="${t.id}_qualityselectionchooser_${height}" ` +
