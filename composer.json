@@ -1,13 +1,12 @@
 {
 	"name": "postyou/contao-abr-streaming-bundle",
-	"description": "Adaptive Bitrate Streaming using Mediaelement.js with MPEG-DASH and HLS manifests",
+	"description": "Adaptive Bitrate Streaming using Mediaelement.js with MPGEG-DASH and HLS manifests",
 	"keywords": [
 		"contao",
 		"streaming",
 		"dash",
 		"hls"
 	],
-	"version": "v1.1.0",
 	"type": "contao-bundle",
 	"license": "Apache-2.0",
 	"authors": [{
@@ -23,8 +22,8 @@
 		"email": "kontakt@postyou.de"
 	},
 	"require": {
-		"php": "~7.0",
-		"contao/core-bundle": "~4.3",
+		"php": ">=7.0",
+		"contao/core-bundle": "^4.9",
 		"contao-components/mediaelement": "~4.2.12"
 	},
 	"autoload": {
