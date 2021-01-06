@@ -87,3 +87,7 @@
 .mejs-qualityselection-selector label.current {
     color: #21f8f8;
 }
+
+.mejs__container .mejs__controls:empty {
+    visibility: hidden !important;
+}

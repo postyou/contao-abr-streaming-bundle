@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * Extension for Contao Open Source CMS (contao.org)
@@ -10,9 +11,17 @@
  * @link    http://www.postyou.de
  * @license http://www.apache.org/licenses/LICENSE-2.0
  */
+
 namespace Postyou\ContaoABRStreamingBundle;
 
-class ContentAbrstreaming extends \ContentElement
+use Contao\ContentElement;
+use Contao\StringUtil;
+use Contao\FilesModel;
+use Contao\System;
+use Contao\Image;
+use Contao\File;
+
+class ContentAbrstreaming extends ContentElement
 {
 
     /**
@@ -23,14 +32,9 @@ class ContentAbrstreaming extends \ContentElement
 
     /**
      * Files object
-     * @var Model\Collection|FilesModel
+     * @var \Contao\Model\Collection|FilesModel
      */
     protected $objFiles;
-    
-    public function __construct($objModule, $strColumn = 'main')
-    {
-        parent::__construct($objModule, $strColumn);
-    }
 
     /**
      * Return if there are no files
@@ -39,32 +43,47 @@ class ContentAbrstreaming extends \ContentElement
      */
     public function generate()
     {
-        if ($this->abrs_playerSRC == '') {
-            return '';
-        }
-        $source = \StringUtil::deserialize($this->abrs_playerSRC);
-
-        if (empty($source) || !\is_array($source)) {
+        if (!$this->abrs_playerSRC)
+        {
             return '';
         }
 
-        $objFiles = \FilesModel::findMultipleByUuidsAndExtensions($source, array('mpd', 'm3u8', 'mp4', 'm4v', 'mov', 'wmv', 'webm', 'ogv'));
+        $source = StringUtil::deserialize($this->abrs_playerSRC);
 
-        if ($objFiles === null) {
+        if (empty($source) || !\is_array($source))
+        {
             return '';
         }
+
+        $objFiles = FilesModel::findMultipleByUuidsAndExtensions($source, array('mpd', 'm3u8'));
+
+        if ($objFiles === null)
+        {
+            return '';
+        }
+
+        $request = System::getContainer()->get('request_stack')->getCurrentRequest();
 
         // Display a list of files in the back end
-        if (TL_MODE == 'BE') {
-            $return = '<ul>';
+		if ($request && System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
+		{
+			$return = '<ul>';
 
-            while ($objFiles->next()) {
-                $objFile = new \File($objFiles->path);
-                $return .= '<li>' . \Image::getHtml($objFile->icon, '', 'class="mime_icon"') . ' <span>' . $objFile->name . '</span> <span class="size">(' . $this->getReadableSize($objFile->size) . ')</span></li>';
-            }
+			while ($objFiles->next())
+			{
+				$objFile = new File($objFiles->path);
+				$return .= '<li>' . Image::getHtml($objFile->icon, '', 'class="mime_icon"') . ' <span>' . $objFile->name . '</span> <span class="size">(' . $this->getReadableSize($objFile->size) . ')</span></li>';
+			}
 
-            return $return . '</ul>';
-        }
+			$return .= '</ul>';
+
+			if ($this->headline)
+			{
+				$return = '<' . $this->hl . '>' . $this->headline . '</' . $this->hl . '>' . $return;
+			}
+
+			return $return;
+		}
 
         $this->objFiles = $objFiles;
 
@@ -79,46 +98,102 @@ class ContentAbrstreaming extends \ContentElement
         /** @var PageModel $objPage */
         global $objPage;
 
+        $this->Template->poster = false;
+
+        // Optional poster
+		if ($this->posterSRC && ($objFile = FilesModel::findByUuid($this->posterSRC)) !== null)
+		{
+			$this->Template->poster = $objFile->path;
+		}
+
         $objFiles = $this->objFiles;
 
         /** @var FilesModel $objFirst */
         $objFirst = $objFiles->current();
 
         // Pre-sort the array by preference
-        if (\in_array($objFirst->extension, array('mpd','m3u8', 'mp4', 'm4v', 'mov', 'wmv', 'webm', 'ogv'))) {
-            $arrFiles = array('mpd'=>null, 'm3u8'=>null, 'mp4'=>null, 'm4v'=>null, 'mov'=>null, 'wmv'=>null, 'webm'=>null, 'ogv'=>null);
+        if (\in_array($objFirst->extension, array('mpd','m3u8')))
+        {
+            $this->Template->containerClass = 'video_container';
+            
+            $arrFiles = array('mpd'=>null, 'm3u8'=>null);
         }
 
         $objFiles->reset();
 
-        // Convert the language to a locale (see #5678)
-        $strLanguage = str_replace('-', '_', $objPage->language);
+		// Convert the language to a locale (see #5678)
+		$strLanguage = str_replace('-', '_', $objPage->language);
 
-        // Pass File objects to the template
-        while ($objFiles->next()) {
-            $arrMeta = \StringUtil::deserialize($objFiles->meta);
+		// Pass File objects to the template
+		while ($objFiles->next())
+		{
+			$arrMeta = StringUtil::deserialize($objFiles->meta);
 
-            if (\is_array($arrMeta) && isset($arrMeta[$strLanguage])) {
-                $strTitle = $arrMeta[$strLanguage]['title'];
-            } else {
-                $strTitle = $objFiles->name;
-            }
+			if (\is_array($arrMeta) && isset($arrMeta[$strLanguage]))
+			{
+				$strTitle = $arrMeta[$strLanguage]['title'];
+			}
+			else
+			{
+				$strTitle = $objFiles->name;
+			}
 
-            $objFile = new \File($objFiles->path);
-            $objFile->title = \StringUtil::specialchars($strTitle);
+			$objFile = new File($objFiles->path);
+			$objFile->title = StringUtil::specialchars($strTitle);
 
-            $arrFiles[$objFile->extension] = $objFile;
-        }
+			$arrFiles[$objFile->extension] = $objFile;
+		}
 
-        $size = \StringUtil::deserialize($this->abrs_playerSize);
+        $size = StringUtil::deserialize($this->playerSize);
 
-        if (!\is_array($size) || empty($size[0]) || empty($size[1])) {
-            $this->Template->size = ' width="640" height="360"';
-        } else {
-            $this->Template->size = ' width="' . $size[0] . '" height="' . $size[1] . '"';
-        }
+		if (\is_array($size) && !empty($size[0]) && !empty($size[1]))
+		{
+			$this->Template->size = ' width="' . $size[0] . '" height="' . $size[1] . '"';
+		}
+		else
+		{
+			// $this->size might contain image size data, therefore unset it (see #2351)
+			$this->Template->size = '';
+		}
 
         $this->Template->files = array_values(array_filter($arrFiles));
-        $this->Template->autoplay = $this->abrs_autoplay;
+
+        $attributes = array('controls' => 'controls');
+		$options = StringUtil::deserialize($this->playerOptions);
+
+		if (\is_array($options))
+		{
+			foreach ($options as $option)
+			{
+				if ($option == 'player_nocontrols')
+				{
+					unset($attributes['controls']);
+				}
+				else
+				{
+					$attributes[substr($option, 7)] = substr($option, 7);
+				}
+			}
+		}
+
+		$this->Template->attributes = $attributes;
+		$this->Template->caption = $this->playerCaption;
+
+		if ($this->playerStart || $this->playerStop)
+		{
+			$range = '#t=';
+
+			if ($this->playerStart)
+			{
+				$range .= $this->playerStart;
+			}
+
+			if ($this->playerStop)
+			{
+				$range .= ',' . $this->playerStop;
+			}
+
+			$this->Template->range = $range;
+		}        
     }
 }
