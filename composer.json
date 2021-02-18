@@ -22,8 +22,8 @@
 		"email": "kontakt@postyou.de"
 	},
 	"require": {
-		"php": "~7.0",
-		"contao/core-bundle": "~4.3",
+		"php": ">=7.0",
+		"contao/core-bundle": "^4.9",
 		"contao-components/mediaelement": "~4.2.12"
 	},
 	"autoload": {

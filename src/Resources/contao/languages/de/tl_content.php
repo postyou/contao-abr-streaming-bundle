@@ -15,8 +15,3 @@
   * Fields
   */
  $GLOBALS['TL_LANG']['tl_content']['abrs_playerSRC'] = array('Video-Dateien', 'Hier können Sie die Video-Datei bzw. – wenn Sie verschiedene Codecs verwenden – die Video-Dateien hinzufügen.');
- $GLOBALS['TL_LANG']['tl_content']['autoplay'] = array('Autoplay', 'Video wird automatisch beim Aufruf der Seite abgespielt.');
- /**
-  * Legends
-  */
- $GLOBALS['TL_LANG']['tl_content']['sources'] = 'Dateien';

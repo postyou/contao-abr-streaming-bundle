@@ -4,25 +4,18 @@
 $GLOBALS['TL_CSS'][] = 'assets/mediaelement/css/mediaelementplayer.min.css|static';
 $GLOBALS['TL_CSS'][] = 'bundles/postyoucontaoabrstreaming/css/qualityselection.css|static';
 ?>
-
-<script src="<?= TL_ASSETS_URL ?>assets/mediaelement/js/mediaelement-and-player.min.js"></script>
+<script src="<?= $this->asset('js/mediaelement-and-player.min.js', 'contao-components/mediaelement') ?>"></script>
 <script src="bundles/postyoucontaoabrstreaming/js/qualityselection.js"></script>
 <script>
   (function () {
-    var e = document.querySelectorAll(':not(picture) > video, :not(picture) > audio');
+    var e = document.querySelectorAll(':not(picture) > video');
     for (var i = 0; i < e.length; i++) {
       if (e[i].classList.contains('abr-streaming')) {
-        if (e[i].classList.contains('autoplay')) var autoplay = true;
         var player = new MediaElementPlayer(e[i], {
           // Put custom options here
-          features: ['playpause', 'current', 'progress', 'duration', 'volume', 'qualityselection', 'fullscreen'],
+          features: e[i].controls? ['playpause', 'current', 'progress', 'duration', 'volume', 'qualityselection', 'fullscreen'] : [],
           renderers: ['native_dash', 'native_hls'],
-          pluginPath: "<?= Environment::get('path') ?>/assets/mediaelement/plugins/",
-          success: function (media, node, instance) {
-            if (autoplay) {
-              player.play();
-            }
-          }
+          pluginPath: "<?= Environment::get('path') ?>/assets/mediaelement/plugins/"
         });
       }
     }
