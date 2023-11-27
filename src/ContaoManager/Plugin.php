@@ -1,34 +1,30 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
+ * This file is part of postyou/contao-abr-streaming-bundle
  *
- * Extension for Contao Open Source CMS (contao.org)
+ * (c) Postyou Werbeagentur
  *
- * Copyright (c) 2018-2019 POSTYOU
- *
- * @package
- * @author  Markus Nestmann
- * @link    http://www.postyou.de
- * @license http://www.apache.org/licenses/LICENSE-2.0
+ * @license MIT
  */
 
 namespace Postyou\ContaoABRStreamingBundle\ContaoManager;
 
+use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
+use Postyou\ContaoABRStreamingBundle\PostyouContaoABRStreamingBundle;
 
 class Plugin implements BundlePluginInterface
 {
-    /**
-     * Plugin for the Contao Manager.
-     *
-     * @author Markus Nestmann
-     */
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create('Postyou\ContaoABRStreamingBundle\PostyouContaoABRStreamingBundle')
-                            ->setLoadAfter(['Contao\CoreBundle\ContaoCoreBundle'])
+            BundleConfig::create(PostyouContaoABRStreamingBundle::class)
+                ->setLoadAfter([ContaoCoreBundle::class]),
         ];
     }
 }
