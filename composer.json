@@ -8,7 +8,7 @@
         "hls"
     ],
     "type": "contao-bundle",
-    "license": "Apache-2.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "Postyou Werbeagentur",
