@@ -1,36 +1,11 @@
-[zur deutschen Version wechseln](https://github.com/postyou/contao-abr-streaming-bundle/blob/master/README.de.md)
 # contao-abr-streaming
-Adaptive Bitrate Streaming using Mediaelement.js with MPEG-DASH and HLS manifests
+
+Adaptive Bitrate Streaming using Video.js
 
 Contao-Extension for Contao 4
 
-## Notes
-
-When using this extension the `js_medialement_dash` template has to be included in the layout.
-
-> You should not use both, `j_medialement` and `js_medialement_dash`, at the same time.
-
-When more than one video source is provided the following order is applied: mpd, m3u8, mp4, m4v, mov, wmv, webm, ogv.
-
-## Usage
-![screenshot](https://github.com/postyou/contao-abr-streaming-bundle/blob/master/readme_img/Element.png)
-
-* Create a new content element `ABR - Streaming`
-* Add MPEG-Dash manifests (e.g. `playlist.mpd`)
-* Add HLS manifests (e.g. `playlist.m3u8`)
-* Add fallback videos (e.g. `mp4, m4v, mov, wmv, webm, ogv`)
-
-## Mediaelement.js Plugin
-With this extension it is possible to include the feature `qualityselection`. This allows the user to switch between video quality levels:
-```js
-var player = new MediaElementPlayer(e[i], {
-    features: ['playpause', 'current', 'progress', 'duration', 'volume', 'qualityselection', 'fullscreen']
-});
-```
-
-![screenshot](https://github.com/postyou/contao-abr-streaming-bundle/blob/master/readme_img/Plugin.png)
-
 ## Example DASH Content Generation
+
 ```sh
 # 1080p - 4800k bitrate
 x264 --output intermediate_4800k.264 --fps 24 --preset slow \
@@ -58,6 +33,7 @@ intermediate_4800k.mp4:id=1080 intermediate_2400k.mp4:id=720 intermediate_1400k.
 ```
 
 ## Useful Links
-* [majamee/alpine-dash-hls](https://github.com/majamee/alpine-dash-hls)
-* [Bitmovin dash content generation](https://bitmovin.com/mp4box-dash-content-generation-x264/)
-* [squidpickles/mpd-to-m3u8](https://github.com/squidpickles/mpd-to-m3u8)
+
+-   [majamee/alpine-dash-hls](https://github.com/majamee/alpine-dash-hls)
+-   [Bitmovin dash content generation](https://bitmovin.com/mp4box-dash-content-generation-x264/)
+-   [squidpickles/mpd-to-m3u8](https://github.com/squidpickles/mpd-to-m3u8)
