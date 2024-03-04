@@ -21,14 +21,14 @@ use Contao\Model\Collection;
 use Contao\StringUtil;
 use Contao\System;
 
-class ContentAbrstreaming extends ContentElement
+class ContentVideoJsPlayer extends ContentElement
 {
     /**
      * Template.
      *
      * @var string
      */
-    protected $strTemplate = 'ce_abrstreaming';
+    protected $strTemplate = 'ce_player';
 
     /**
      * Files object.
@@ -166,10 +166,11 @@ class ContentAbrstreaming extends ContentElement
             }
         }
 
-        if ($this->playerSetup) {
-            $attributes['player_setup'] = 'data-setup=\''.StringUtil::specialcharsAttribute($this->playerSetup).'\'';
+        if ($this->useVideoJs && $this->videoJsSetup) {
+            $attributes['videojs_setup'] = 'data-setup=\''.StringUtil::specialcharsAttribute($this->videoJsSetup).'\'';
         }
 
+        $this->Template->useVideoJs = $this->useVideoJs;
         $this->Template->attributes = $attributes;
         $this->Template->preload = $this->playerPreload;
         $this->Template->caption = $strCaption;

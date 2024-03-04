@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
+
 /*
  * This file is part of postyou/contao-abr-streaming-bundle
  *
@@ -10,18 +12,17 @@ declare(strict_types=1);
  * @license MIT
  */
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['abrstreaming'] = '
-    {type_legend},type,headline;
-    {source_legend},playerSRC;
-    {player_legend},playerOptions,playerSetup,playerSize,playerPreload,playerCaption,playerStart,playerStop;
-    {poster_legend:hide},posterSRC;
-    {template_legend:hide},customTpl;
-    {protected_legend:hide},protected;
-    {expert_legend:hide},cssID;
-    {invisible_legend:hide},invisible,start,stop
-';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'useVideoJs';
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['useVideoJs'] = 'videoJsSetup';
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['playerSetup'] = [
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['useVideoJs'] = [
+    'inputType' => 'checkbox',
+    'eval' => ['submitOnChange' => true],
+    'sql' => "char(1) COLLATE ascii_bin NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['videoJsSetup'] = [
     'inputType' => 'textarea',
     'default' => <<<'EOF'
         {
@@ -36,3 +37,9 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['playerSetup'] = [
     'explanation' => 'insertTags',
     'sql' => 'text NULL',
 ];
+        
+PaletteManipulator::create()
+    ->addLegend('videojs_legend', 'player_legend', PaletteManipulator::POSITION_BEFORE)
+    ->addField('useVideoJs', 'videojs_legend', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('player', 'tl_content')
+;

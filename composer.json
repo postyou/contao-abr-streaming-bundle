@@ -40,7 +40,7 @@
             "Postyou\\ContaoABRStreamingBundle\\": "src/"
         },
         "classmap": [
-            "contao/elements/ContentAbrstreaming.php"
+            "contao/elements/ContentVideoJsPlayer.php"
         ]
     },
     "extra": {
