@@ -32,6 +32,9 @@ return ECSConfig::configure()
         MethodChainingIndentationFixer::class => [
             'config/*.php',
         ],
+        HeaderCommentFixer::class => [
+            'contao/elements/ContentVideoJsPlayer.php',
+        ],
     ])
     ->withPaths([
         __DIR__.'/config',
