@@ -10,5 +10,9 @@ declare(strict_types=1);
  * @license MIT
  */
 
+use Postyou\ContaoABRStreamingBundle\ContentAbrstreaming;
+
+$GLOBALS['TL_CTE']['media']['abrstreaming'] = ContentAbrstreaming::class;
+
 $GLOBALS['TL_MIME']['mpd'] = ['application/dash+xml', 'iconMPEG.svg'];
-$GLOBALS['TL_MIME']['m3u8'] = ['application/x-mpegURL', 'iconMPEG.svg'];
+$GLOBALS['TL_MIME']['m3u8'] = ['application/vnd.apple.mpegurl', 'iconMPEG.svg'];

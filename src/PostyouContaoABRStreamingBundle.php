@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 /*
- * This file is part of postyou/contao-abr-streaming-bundle
+ * This file is part of postyou/contao-abr-streaming-bundle.
  *
- * (c) Postyou Werbeagentur
+ * (c) POSTYOU Werbeagentur
  *
  * @license MIT
  */
