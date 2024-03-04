@@ -5,9 +5,12 @@ declare(strict_types=1);
 /*
  * This file is part of postyou/contao-abr-streaming-bundle.
  *
- * (c) POSTYOU Werbeagentur
+ * (c) Leo Feyer
  *
- * @license MIT
+ * Modified for additional ABR streaming support by POSTYOU Werbeagentur
+ *
+ * @see Contao\ContentMedia for original code
+ * @license https://github.com/contao/contao/blob/4.13/LICENSE
  */
 
 namespace Postyou\ContaoABRStreamingBundle;
