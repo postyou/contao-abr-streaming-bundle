@@ -2,6 +2,14 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of postyou/contao-abr-streaming-bundle.
+ *
+ * (c) POSTYOU Werbeagentur
+ *
+ * @license MIT
+ */
+
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 
 /*
@@ -14,7 +22,6 @@ use Contao\CoreBundle\DataContainer\PaletteManipulator;
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'useVideoJs';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['useVideoJs'] = 'videoJsSetup';
-
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['useVideoJs'] = [
     'inputType' => 'checkbox',
@@ -37,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['videoJsSetup'] = [
     'explanation' => 'insertTags',
     'sql' => 'text NULL',
 ];
-        
+
 PaletteManipulator::create()
     ->addLegend('videojs_legend', 'player_legend', PaletteManipulator::POSITION_BEFORE)
     ->addField('useVideoJs', 'videojs_legend', PaletteManipulator::POSITION_APPEND)
