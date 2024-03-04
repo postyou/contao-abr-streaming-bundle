@@ -1,0 +1,6 @@
+{
+    "video-js.css": "/bundles/postyoucontaoabrstreaming/video-js.v8.9.0.min.css",
+    "video.js": "/bundles/postyoucontaoabrstreaming/video.v8.9.0.min.js",
+    "videojs-http-source-selector.js": "/bundles/postyoucontaoabrstreaming/videojs-http-source-selector.v1.1.7.min.js",
+    "videojs-http-source-selector.css": "/bundles/postyoucontaoabrstreaming/videojs-http-source-selector.v1.1.7.min.css"
+}

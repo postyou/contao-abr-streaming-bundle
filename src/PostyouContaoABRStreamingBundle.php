@@ -1,19 +1,23 @@
 <?php
-/**
+
+declare(strict_types=1);
+
+/*
+ * This file is part of postyou/contao-abr-streaming-bundle.
  *
- * Extension for Contao Open Source CMS (contao.org)
+ * (c) POSTYOU Werbeagentur
  *
- * Copyright (c) 2018-2019 POSTYOU
- *
- * @package
- * @author  Markus Nestmann
- * @link    http://www.postyou.de
- * @license http://www.apache.org/licenses/LICENSE-2.0
+ * @license MIT
  */
+
 namespace Postyou\ContaoABRStreamingBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class PostyouContaoABRStreamingBundle extends Bundle
 {
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
+    }
 }
