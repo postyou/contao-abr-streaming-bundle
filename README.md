@@ -1,6 +1,7 @@
 # Adaptive Bitrate Streaming using Video.js
 
 [![](https://img.shields.io/packagist/v/postyou/contao-abr-streaming-bundle.svg)](https://packagist.org/packages/postyou/contao-abr-streaming-bundle)
+[![](https://img.shields.io/badge/video.js-v8.12.0-blue.svg)](https://github.com/videojs/video.js/releases)
 [![](https://img.shields.io/packagist/l/postyou/contao-abr-streaming-bundle.svg)](https://packagist.org/packages/postyou/contao-abr-streaming-bundle)
 [![](https://img.shields.io/packagist/dt/postyou/contao-abr-streaming-bundle.svg)](https://packagist.org/packages/postyou/contao-abr-streaming-bundle)
 
