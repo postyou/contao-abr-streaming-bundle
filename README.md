@@ -1,5 +1,9 @@
 # Adaptive Bitrate Streaming using Video.js
 
+[![](https://img.shields.io/packagist/v/postyou/contao-abr-streaming-bundle.svg)](https://packagist.org/packages/postyou/contao-abr-streaming-bundle)
+[![](https://img.shields.io/packagist/l/postyou/contao-abr-streaming-bundle.svg)](https://packagist.org/packages/postyou/contao-abr-streaming-bundle)
+[![](https://img.shields.io/packagist/dt/postyou/contao-abr-streaming-bundle.svg)](https://packagist.org/packages/postyou/contao-abr-streaming-bundle)
+
 This extension enables adaptive bitrate streaming with [Video.js](https://github.com/videojs/video.js) in contao. It contains a [source selector plugin](https://github.com/FreeTubeApp/videojs-http-source-selector) that provides "user-selectable options for adaptive http streams":
 
 ![Source Selection Screenshot](docs/source-selector-screenshot.png)
