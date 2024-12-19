@@ -33,10 +33,9 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['videoJsSetup'] = [
     'inputType' => 'textarea',
     'default' => <<<'EOF'
         {
+            "fluid": true,
             "plugins": {
-                "httpSourceSelector": {
-                    "default": "auto"
-                }
+                "qualityMenu": {}
             }
         }
         EOF,

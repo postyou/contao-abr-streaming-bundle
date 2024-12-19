@@ -2,10 +2,15 @@
 	
 <?php if ($this->useVideoJs) {
 	$GLOBALS['TL_CSS'][] = $this->asset('video-js.css', 'postyou_contao_abr_streaming');
-	$GLOBALS['TL_CSS'][] = $this->asset('videojs-http-source-selector.css', 'postyou_contao_abr_streaming');
+  $GLOBALS['TL_JAVASCRIPT'][] = $this->asset('video.js', 'postyou_contao_abr_streaming');
 
-	$GLOBALS['TL_JAVASCRIPT'][] = $this->asset('video.js', 'postyou_contao_abr_streaming');
-	$GLOBALS['TL_JAVASCRIPT'][] = $this->asset('videojs-http-source-selector.js', 'postyou_contao_abr_streaming');
+  if (str_contains($this->attributes['videojs_setup'], 'qualityMenu')) {
+    $GLOBALS['TL_CSS'][] = $this->asset('videojs-contrib-quality-menu.css', 'postyou_contao_abr_streaming');
+    $GLOBALS['TL_JAVASCRIPT'][] = $this->asset('videojs-contrib-quality-menu.js', 'postyou_contao_abr_streaming');
+  } elseif (str_contains($this->attributes['videojs_setup'], 'httpSourceSelector')) {
+    $GLOBALS['TL_CSS'][] = $this->asset('videojs-http-source-selector.css', 'postyou_contao_abr_streaming');
+    $GLOBALS['TL_JAVASCRIPT'][] = $this->asset('videojs-http-source-selector.js', 'postyou_contao_abr_streaming');
+  }
 } ?>
 
 <?php $this->block('content'); ?>
