@@ -1,0 +1,6 @@
+{
+  "name": "contao-abr-streaming-bundle",
+  "dependencies": {
+    "video.js": "^8.21.0"
+  }
+}

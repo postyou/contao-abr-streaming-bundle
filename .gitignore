@@ -2,6 +2,10 @@
 /composer.lock
 /vendor/
 
+# NPM
+/package-lock.json
+/node_modules/
+
 # Configuration
 /.vscode/
 .php-version
