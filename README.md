@@ -5,7 +5,9 @@
 [![](https://img.shields.io/packagist/l/postyou/contao-abr-streaming-bundle.svg)](https://packagist.org/packages/postyou/contao-abr-streaming-bundle)
 [![](https://img.shields.io/packagist/dt/postyou/contao-abr-streaming-bundle.svg)](https://packagist.org/packages/postyou/contao-abr-streaming-bundle)
 
-This extension enables adaptive bitrate streaming with [Video.js](https://github.com/videojs/video.js) in contao. It contains a [source selector plugin](https://github.com/FreeTubeApp/videojs-http-source-selector) that provides "user-selectable options for adaptive http streams":
+This extension enables adaptive bitrate streaming with [Video.js](https://github.com/videojs/video.js) in contao. It contains the [quality selection menu](https://github.com/videojs/videojs-contrib-quality-menu) that provides a "menu button to the player's control bar which allows you to manually select the playback quality in HLS or Dash sources".
+
+For BC the previous [source selector plugin](https://github.com/FreeTubeApp/videojs-http-source-selector) can still be used.
 
 ![Source Selection Screenshot](docs/source-selector-screenshot.png)
 
