@@ -9,7 +9,9 @@ This extension enables adaptive bitrate streaming with [Video.js](https://github
 
 For BC the previous [source selector plugin](https://github.com/FreeTubeApp/videojs-http-source-selector) can still be used.
 
-![Source Selection Screenshot](docs/source-selector-screenshot.png)
+| Backend | Frontend |
+| - | - |
+| ![Backend Fields Screenshot](docs/backend-fields.png) | ![Source Selection Screenshot](docs/source-selector-screenshot.png) |
 
 ## Upgrade from version 1
 
