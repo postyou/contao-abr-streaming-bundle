@@ -1,7 +1,7 @@
 {
   "name": "contao-abr-streaming-bundle",
   "dependencies": {
-    "video.js": "^8.21.0",
-    "videojs-contrib-quality-menu": "^1.0.3"
+    "video.js": "8.23.4",
+    "videojs-contrib-quality-menu": "1.0.4"
   }
 }

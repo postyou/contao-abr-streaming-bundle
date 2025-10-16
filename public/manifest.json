@@ -1,6 +1,6 @@
 {
-    "video-js.css": "/bundles/postyoucontaoabrstreaming/video-js.v8.22.0.min.css",
-    "video.js": "/bundles/postyoucontaoabrstreaming/video.v8.22.0.min.js",
+    "video-js.css": "/bundles/postyoucontaoabrstreaming/video-js.v8.23.4.min.css",
+    "video.js": "/bundles/postyoucontaoabrstreaming/video.v8.23.4.min.js",
     "videojs-contrib-quality-menu.css": "/bundles/postyoucontaoabrstreaming/videojs-contrib-quality-menu.v1.0.4.min.css",
     "videojs-contrib-quality-menu.js": "/bundles/postyoucontaoabrstreaming/videojs-contrib-quality-menu.v1.0.4.min.js",
     "videojs-http-source-selector.js": "/bundles/postyoucontaoabrstreaming/videojs-http-source-selector.v1.1.7.min.js",
